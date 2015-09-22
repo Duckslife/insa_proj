@@ -1,0 +1,5 @@
+postgresql:
+    host: insa.ckzxdkr50slb.us-west-2.rds.amazonaws.com:5432
+    db_name: insa_tab
+    username: insa_master
+    passwd: dlstkwoddl

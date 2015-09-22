@@ -39,7 +39,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'insa',
 )
-
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -72,20 +71,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'web_pro.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'insa',
-        'USER': 'user_a',
-        'PASSWORD': 'aaaa',
-        'HOST': 'localhost',
-        'PORT': '3306'
-
-    }
-}
 
 
 # Internationalization
