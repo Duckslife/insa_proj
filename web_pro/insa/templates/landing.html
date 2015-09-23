@@ -5,21 +5,40 @@
     <title>HRM</title>
 </head>
 <body>
+<script>
+    function numChk()
+    {
+        var count = document.getElementById('emp_count')
+        var num_check=/^[0-9]*$/
+        var frm = document.frm
+        if(count = ""){
+            alert('인원을 입력하여 주세요.')
+
+            frm.action = "/"
+        }
+        else if(num_check.test(count)){
+            alert('숫자만 입렵해 주세요')
+            frm.action = "/"
+        }
+        else(parseInt(count) == true){
+            frm.action = "input/pinfo"
+        }
+    }
+</script>
+
     <h1>인사</h1>
-    <form method="post" action="/input/pinfo">
+    <form method="post" name='frm' onsubmit="numChk()">
         <table border="1">
         <tr>
-        <td><input name="name" id="emp_name" placeholder="이름을 입력하여 주세요"/></td>
-        <td><input name="division" id="div_name" placeholder="부서를 입력하여 주세요"/></td>
-        <td><input name="role" id="role_name" placeholder="직급을 입력하여 주세요"/>
+        <td><input name="emp_count" id="emp_count" placeholder="입력 인원수를 입력하여 주세요."/></td>
         </td>
         </tr>
         <tr><td colspan="3", align="right"><input type="submit" value="작성"/>
         <input type="reset" value="취소" /></td></tr>
         </table>
         {% csrf_token %}
-
     </form>
 
 </body>
+
 </html>
