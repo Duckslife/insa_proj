@@ -5,29 +5,11 @@
     <title>HRM</title>
 </head>
 <body>
-<script>
-    function numChk()
-    {
-        var count = document.getElementById('emp_count')
-        var num_check=/^[0-9]*$/
-        var frm = document.frm
-        if(count = ""){
-            alert('인원을 입력하여 주세요.')
 
-            frm.action = "/"
-        }
-        else if(num_check.test(count)){
-            alert('숫자만 입렵해 주세요')
-            frm.action = "/"
-        }
-        else(parseInt(count) == true){
-            frm.action = "input/pinfo"
-        }
-    }
-</script>
+
 
     <h1>인사</h1>
-    <form method="post" name='frm' onsubmit="numChk()">
+    <form method="post" action="input/pinfo">
         <table border="1">
         <tr>
         <td><input name="emp_count" id="emp_count" placeholder="입력 인원수를 입력하여 주세요."/></td>

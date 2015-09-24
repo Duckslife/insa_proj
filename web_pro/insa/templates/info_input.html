@@ -6,14 +6,17 @@
 </head>
 <body>
 <h1>인사정보 입력</h1>
-    <form method="post" action="/input/pinfo">
+    <form method="post" action="people">
+
         <table border="1">
+        {% for i in count %}
         <tr>
-        <td><input name="name" id="emp_name" placeholder="이름을 입력하여 주세요"/></td>
-        <td><input name="division" id="div_name" placeholder="부서를 입력하여 주세요"/></td>
+        <td ><input name="name" id="emp_name" placeholder="이름을 입력하여 주세요"/></td>
+        <td ><input name="division" id="div_name" placeholder="부서를 입력하여 주세요"/></td>
         <td><input name="role" id="role_name" placeholder="직급을 입력하여 주세요"/>
         </td>
         </tr>
+        {% endfor %}
         <tr><td colspan="3", align="right"><input type="submit" value="작성"/>
         <input type="reset" value="취소" /></td></tr>
         </table>

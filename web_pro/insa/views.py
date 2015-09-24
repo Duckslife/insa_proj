@@ -1,9 +1,8 @@
 # -*- coding:utf-8 -*-
 
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render, render_to_response, redirect
 from django.http import request, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib import messages
 
 import json
 # Create your views here.
@@ -13,13 +12,30 @@ def employee(request):
 
 def count_person(request):
     count = request.POST['emp_count']
+    context_dict = {'count': range(0, int(count))}
+    return render(request, 'info_input.html',context_dict)
 
 
 @csrf_exempt
 def add_person(request):
-    role = request.POST['role']
-    name = request.POST['name']
-    div = request.POST['division']
+    name = request.POST.getlist('name')
+    division = request.POST.getlist('division')
+    role = request.POST.getlist('role')
+    name_list = []
+    role_list = []
+    div_list = []
+    for i in range(0, len(name)):
+        name_list.append(name[i])
+        role_list.append(role[i])
+        div_list.append(division[i])
+
+    context_dict = {'name': name_list,
+                    'role': role_list,
+                    'division': div_list,
+                    'range': range(0, len(name))}
+    print (context_dict)
+    return render(request, 'main.html', context_dict)
 
 
-    return HttpResponse(div)
+def person_main(request):
+    pass

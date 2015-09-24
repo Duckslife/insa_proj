@@ -9,6 +9,7 @@ urlpatterns = [
 
     #url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.employee, name='landing'),
-    url(r'input/pinfo', views.count_person, name='counting'),
+    url(r'input/pinfo', views.count_person, name='count'),
+    url(r'input/people', views.add_person, name='add'),
     #url('/', ),
 ]
