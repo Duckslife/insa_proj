@@ -1,3 +1,4 @@
 # -*- coding: utf-8 -*-
 
-from .base import Base
+from .employee import Employee
+from .res_insa import Res

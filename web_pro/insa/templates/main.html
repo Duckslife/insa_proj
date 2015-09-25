@@ -8,15 +8,18 @@
 <h1>인사</h1>
 <table border="1">
     <tr>
+        <td>순번</td>
         <td>이름</td>
+        <td>직급</td>
         <td>부서</td>
-        <td>직</td>
     </tr>
-    {% for i in range %}
+    {% for name, role, division in data %}
     <tr>
-        <td>{{name.i}}</td>
-        <td>{{division}}</td>
+        <td>{{forloop.counter}}</td>
+        <td>{{name}}</td>
         <td>{{role}}</td>
+        <td>{{division}}</td>
+        <td><a href="/view/grade/{{name}}">점수</a></td>
     </tr>
     {% endfor %}
 </table>

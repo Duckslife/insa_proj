@@ -3,6 +3,8 @@
 from django.shortcuts import render, render_to_response, redirect
 from django.http import request, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from insa.models import Employee
+from insa.database.engine import session
 
 import json
 # Create your views here.
@@ -21,21 +23,25 @@ def add_person(request):
     name = request.POST.getlist('name')
     division = request.POST.getlist('division')
     role = request.POST.getlist('role')
-    name_list = []
-    role_list = []
-    div_list = []
-    for i in range(0, len(name)):
-        name_list.append(name[i])
-        role_list.append(role[i])
-        div_list.append(division[i])
 
-    context_dict = {'name': name_list,
-                    'role': role_list,
-                    'division': div_list,
-                    'range': range(0, len(name))}
-    print (context_dict)
+    data = zip(name, role, division)
+    for i in range(0, len(name)):
+        emp = Employee(
+            name = name[i],
+            division = 1,
+            role = 1
+        )
+        l = session.add(emp)
+        print(l)
+
+
+    context_dict = {
+                        'data': data
+                    }
+    print(context_dict)
     return render(request, 'main.html', context_dict)
 
 
 def person_main(request):
-    pass
+
+    return redirect('')

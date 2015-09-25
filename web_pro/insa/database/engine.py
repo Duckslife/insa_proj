@@ -3,11 +3,12 @@
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
-from web_pro.insa.utils.yaml_decoder import post_conn
+from insa.utils.yaml_decoder import post_conn
 
 engine = create_engine(
     "postgresql+psycopg2://%s:%s@%s/%s" % post_conn,
-    echo = True
+    echo = True,
+    isolation_level ="AUTOCOMMIT"
 )
 
 Base = declarative_base()
