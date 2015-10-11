@@ -5,12 +5,19 @@ from django.http import request, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from insa.models import Employee
 from insa.database.engine import session
+from insa.utils.encoder import AlchemyEncoder
 
 import json
 # Create your views here.
 
 def employee(request):
-    return render(request, 'landing.html')
+    query = session.query(Employee)
+    data = [dict(id=q.id)for q in query]
+    if(len(data) == 0 or len(data) < 0):
+        return render(request, 'landing.html')
+    else:
+        return render(request, 'main.html')
+
 
 def count_person(request):
     count = request.POST['emp_count']
@@ -24,21 +31,25 @@ def add_person(request):
     division = request.POST.getlist('division')
     role = request.POST.getlist('role')
 
-    data = zip(name, role, division)
+
     for i in range(0, len(name)):
         emp = Employee(
             name = name[i],
-            division = 1,
-            role = 1
+            division = division[i],
+            role = role[i]
         )
         l = session.add(emp)
-        print(l)
+        session.commit()
+    print ('aft query')
+
+    queries = session.query(Employee)
+    raw = [dict(name = r.name, division = r.division, role = r.role)for r in queries]
+    print(raw)
 
 
     context_dict = {
                         'data': data
                     }
-    print(context_dict)
     return render(request, 'main.html', context_dict)
 
 

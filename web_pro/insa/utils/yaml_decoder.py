@@ -9,4 +9,4 @@ config = yaml.load(codecs.open(path, 'r'))
 print (path)
 post_conn =(config['postgresql']['username'], config['postgresql']['passwd'], config['postgresql']['host'], config['postgresql']['db_name'])
 
-
+print(post_conn)

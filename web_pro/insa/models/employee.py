@@ -7,9 +7,9 @@ class Employee(Base):
     id = Column(Integer, primary_key=True)
     created = Column(DateTime, default=func.now())
     modified = Column(DateTime)
-    name = Column(String(255), nullable=False)
-    role = Column(String(255))
-    division = Column(String(255))
+    name = Column(String, nullable=False)
+    role = Column(String)
+    division = Column(String)
 
 Base.metadata.create_all(engine)
 

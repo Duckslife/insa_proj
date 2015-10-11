@@ -10,6 +10,7 @@ engine = create_engine(
     echo = True,
     isolation_level ="AUTOCOMMIT"
 )
+print(engine)
 
 Base = declarative_base()
 Session = sessionmaker()
