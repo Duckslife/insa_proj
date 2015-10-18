@@ -2,20 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>인사표</title>
+    <title>{{info.name}}님의 점수 결과 입니다.</title>
 </head>
 <body>
-<h1>인사</h1>
+<h1>점수 정보</h1>
 <table border="1">
     <tr>
         <td>순번</td>
         <td>아이디번호</td>
         <td>이름</td>
-        <td>직급</td>
-        <td>부서</td>
+        {%for info in data%}
+        <td>{{info.course}}</td>
+        <td>{{info.subject}}</td>
+        {% endfor %}
+        <td></td>
         <td colspan="2">옵션</td>
     </tr>
-    {% for info in data %}
     <tr>
         <td>{{forloop.counter}}</td>
         <td>{{info.id}}</td>
@@ -25,7 +27,6 @@
         <td><a href="/view/grade/{{info.id}}">점수</a></td>
         <td><a href="/view/dinfo/{{info.id}}">삭제</a></td>
     </tr>
-    {% endfor %}
     <tr>
         <td colspan="7"><a href="/">인사 정보 입력</a></td>
     </tr>

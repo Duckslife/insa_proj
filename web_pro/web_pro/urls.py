@@ -12,5 +12,6 @@ urlpatterns = [
     url(r'input/pinfo', views.count_person, name='count'),
     url(r'input/people', views.add_person, name='add'),
     url(r'view/grade/(?P<jobID>\d+)$', views.person_main, name='show'),
+    url(r'view/dinfo/(?P<jobID>\d+)$', views.del_info, name='del'),
     #url('/', ),
 ]
