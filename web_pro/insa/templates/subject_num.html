@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>과목입력</title>
+</head>
+<script>
+    function goBack(){
+        window.history.back()
+    }
+</script>
+<body>
+    <h1>과목 갯수 입력</h1>
+    {% for info in id %}
+    <form method="post" action="mark/{{info.id}}">
+    {% endfor %}
+        <table border="1">
+        <tr>
+        <td><input name="sub_count" id="sub_count" placeholder="과목 갯수를 입력해주세요"/></td>
+        </tr>
+        <tr><td colspan="3", align="right"><input type="submit" value="작성"/>
+        <button onclick= "goBack()"> 뒤로 </button></td></tr>
+        </table>
+        {% csrf_token %}
+    </form>
+
+
+</body>
+</html>

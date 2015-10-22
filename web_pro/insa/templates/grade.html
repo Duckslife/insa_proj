@@ -2,33 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{info.name}}님의 점수 결과 입니다.</title>
+    <title>점수정보</title>
 </head>
 <body>
-<h1>점수 정보</h1>
+{% for info in name %}
+<h1>{{info.name}}님의 점수 결과 입니다.</h1>
+{% endfor %}
 <table border="1">
     <tr>
-        <td>순번</td>
-        <td>아이디번호</td>
-        <td>이름</td>
-        {%for info in data%}
-        <td>{{info.course}}</td>
-        <td>{{info.subject}}</td>
+        <td>과목</td>
+        <td>점수</td>
+        <td>과정</td>
+    </tr>
+    {% for info in data %}
+    <tr>
+        <td width="100">{{info.subject}}</td>
+        <td width="100">{{info.mark}}</td>
+        <td width="100">{{info.course}}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td colspan="3" align="right">
+        <a href="javascript:history.back()">뒤로</a>
+        {% for info in name%}
+        <a href="/input/grade/{{info.id}}">점수입력</a>
         {% endfor %}
-        <td></td>
-        <td colspan="2">옵션</td>
-    </tr>
-    <tr>
-        <td>{{forloop.counter}}</td>
-        <td>{{info.id}}</td>
-        <td>{{info.name}}</td>
-        <td>{{info.role}}</td>
-        <td>{{info.division}}</td>
-        <td><a href="/view/grade/{{info.id}}">점수</a></td>
-        <td><a href="/view/dinfo/{{info.id}}">삭제</a></td>
-    </tr>
-    <tr>
-        <td colspan="7"><a href="/">인사 정보 입력</a></td>
+        </td>
     </tr>
 </table>
 </body>

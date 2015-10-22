@@ -3,8 +3,9 @@
 from django.shortcuts import render, render_to_response, redirect
 from django.http import request, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from insa.models import Employee
+from insa.models import Employee, Res
 from insa.database.engine import session
+from django.template import Context
 from insa.utils.encoder import AlchemyEncoder
 
 import json
@@ -22,6 +23,7 @@ def main_redirect():
 
 def employee(request):
     rows = session.query(Employee).count()
+    print(rows)
     if(rows > 0):
         context_dict = {
             'data': select_all()
@@ -29,7 +31,10 @@ def employee(request):
         return render(request, 'main.html', context_dict)
     return render(request, 'landing.html')
 
+def counter(request):
+    return render_to_response('landing.html')
 
+@csrf_exempt
 def count_person(request):
     count = request.POST['emp_count']
     context_dict = {'count': range(0, int(count))}
@@ -41,40 +46,35 @@ def add_person(request):
     name = request.POST.getlist('name')
     division = request.POST.getlist('division')
     role = request.POST.getlist('role')
-    for i in range(0, len(name)):
-        emp = Employee(
-            name = name[i],
-            division = division[i],
-            role = role[i]
-        )
-        l = session.add(emp)
-        session.commit()
-    print ('aft query')
+    if name and division and role == '':
+        return redirect('/')
 
-    queries = session.query(Employee).all
-    #raw = [dict(name = r.name, division = r.division, role = r.role)for r in queries]
-    #딕셔너리 인 리스트 타입 익스팬드 필요.
+    else:
+        for i in range(0, len(name)):
+            emp = Employee(
+                name = name[i],
+                division = division[i],
+                role = role[i]
+            )
+            session.add(emp)
+            session.commit()
+        return redirect('/')
 
 
-
+def person_main(request, jobID):
+    info = session.query(Res).filter_by(emp_id=jobID)
+    name = session.query(Employee.name, Employee.id).filter_by(id = jobID)
     context_dict = {
-                        'data': queries
-                    }
-    return render_to_response('main.html', context_dict)
-
-
-def person_main(request):
-
-    return redirect('')
+        'data': info,
+        'name': name
+    }
+    return render_to_response('grade.html', context_dict)
 
 def del_info(request, jobID):
     session.query(Employee).filter_by(id=jobID).delete()
     session.commit()
-    context_dict = {
-            'data': select_all()
-        }
-    return render(request, 'main.html', context_dict)
-
+    return redirect('/')
+'''
 class UserInfo(request):
     def show_grade(self, jobID):
         row = session.query(Employee).filter_by(id=jobID)
@@ -82,3 +82,36 @@ class UserInfo(request):
             'data' : row
         }
         return render_to_response('grade.html',context_dict)
+'''
+@csrf_exempt
+def add_grade(request, jobID):
+    user = session.query(Employee).filter_by(id=jobID)
+    context_dict = {
+        "id" : user
+    }
+    return render_to_response('subject_num.html', context_dict)
+
+@csrf_exempt
+def mark_grade(request, jobID):
+    count = request.POST['sub_count']
+    context_dict = {'count': range(0, int(count)),
+                    'id': jobID}
+    return render_to_response('grade_input.html',context_dict)
+
+@csrf_exempt
+def input_mark(request, jobID):
+    subject = request.POST.getlist('subject')
+    course = request.POST.getlist('course')
+    mark = request.POST.getlist('mark')
+    print(subject)
+    print(jobID)
+    for i in range(0, len(subject)):
+            result = Res(
+                emp_id = int(jobID),
+                subject = subject[i],
+                course = course[i],
+                mark = mark[i]
+            )
+            session.add(result)
+            session.commit()
+    return redirect('/')

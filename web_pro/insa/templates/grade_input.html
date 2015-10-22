@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html>
-<head lang="en">
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <title></title>
 </head>
 <body>
+<h1>인사정보 입력</h1>
+    {% for info in id %}
+    <form method="post" action="res/{{id}}">
+    {% endfor %}
+        <table border="1">
+        {% for i in count %}
+        <tr>
+        <td ><input name="subject" id="sub_name" placeholder="과목명"/></td>
+        <td ><input name="course" id="course_name" placeholder="과정명"/></td>
+        <td><input name="mark" id="sub_mark" placeholder="점수"/></td>
+        </tr>
+        {% endfor %}
+        <tr><td colspan="3", align="right"><input type="submit" value="작성"/>
+        <input type="reset" value="취소" /></td></tr>
+        </table>
+        {% csrf_token %}
 
+    </form>
 </body>
 </html>
