@@ -3,7 +3,7 @@
 from django.shortcuts import render, render_to_response, redirect
 from django.http import request, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from insa.models import Employee, Res
+from insa.models import *
 from insa.database.engine import session
 from django.template import Context
 from insa.utils.encoder import AlchemyEncoder
@@ -21,6 +21,7 @@ def main_redirect():
         }
     return render(request, 'main.html', context_dict)
 
+@csrf_exempt
 def employee(request):
     rows = session.query(Employee).count()
     print(rows)
@@ -60,7 +61,6 @@ def add_person(request):
             session.commit()
         return redirect('/')
 
-
 def person_main(request, jobID):
     info = session.query(Res).filter_by(emp_id=jobID)
     name = session.query(Employee.name, Employee.id).filter_by(id = jobID)
@@ -69,6 +69,7 @@ def person_main(request, jobID):
         'name': name
     }
     return render_to_response('grade.html', context_dict)
+
 
 def del_info(request, jobID):
     session.query(Employee).filter_by(id=jobID).delete()
@@ -115,3 +116,36 @@ def input_mark(request, jobID):
             session.add(result)
             session.commit()
     return redirect('/')
+
+def std_list(request):
+    rows = session.query(Standard).count()
+    if rows >= 1:
+        context_dict = {
+            'data': session.query(Standard).all()
+        }
+        return render_to_response('standard_list.html', context_dict)
+
+    else:
+
+        return render_to_response('std_subject_num.html')
+@csrf_exempt
+def std_num(request):
+    count = request.POST['sub_count']
+    context_dict = {'count': range(0, int(count))}
+    return render_to_response('standard_input.html', context_dict)
+
+@csrf_exempt
+def input_std(request):
+    subject = request.POST.getlist('subject')
+    course = request.POST.getlist('course')
+    mark = request.POST.getlist('stdmark')
+
+    for i in range(0, len(subject)):
+            result = Standard(
+                subject = subject[i],
+                course = course[i],
+                standard = mark[i]
+            )
+            session.add(result)
+            session.commit()
+    return redirect('view/standard')

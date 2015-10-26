@@ -1,0 +1,10 @@
+{% extends "info_input.html" %}
+{% block head %} 기준 점수 입력 {% endblock %}
+{% block form %}
+    <form method="post" action="standard">
+{% endblock %}
+{% block contents %}
+        <td ><input name="subject"  placeholder="과목명을 입력 하여 주세요"/></td>
+        <td ><input name="course"  placeholder="코스명을 입력하여 주세요"/></td>
+        <td><input name="stdmark" placeholder="기준 점수를 입력하여 주세요"/></td>
+{% endblock %}

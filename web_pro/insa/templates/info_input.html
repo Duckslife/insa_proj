@@ -5,16 +5,22 @@
     <title></title>
 </head>
 <body>
-<h1>인사정보 입력</h1>
-    <form method="post" action="people">
 
+<h1>{% block head %}인사정보 입력
+{% endblock %}
+</h1>
+
+    {% block form %}
+    <form method="post" action="people">
+    {% endblock %}
         <table border="1">
         {% for i in count %}
         <tr>
+        {% block contents %}
         <td ><input name="name" id="emp_name" placeholder="이름을 입력하여 주세요"/></td>
         <td ><input name="division" id="div_name" placeholder="부서를 입력하여 주세요"/></td>
         <td><input name="role" id="role_name" placeholder="직급을 입력하여 주세요"/></td>
-
+        {% endblock %}
         </tr>
         {% endfor %}
         <tr><td colspan="3", align="right"><input type="submit" value="작성"/>
