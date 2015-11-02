@@ -11,13 +11,19 @@
         <td>과목</td>
         <td>코스</td>
         <td>점수</td>
+        <td colspan="2">옵션</td>
     </tr>
     <tr>
         {% for stand in data %}
-        <td>{{ stand.subject }}</td>
-        <td>{{ stand.course}}</td>
-        <td>{{ stand.standard }}</td>
+        <td width="100">{{ stand.subject }}</td>
+        <td width="100">{{ stand.course}}</td>
+        <td width="100">{{ stand.standard }}</td>
+        <td><a href ="/diff/std/{{stand.subject}}">점수 변경</a></td>
+        <td><a href ="del/std/{{stand.subject}}">점수 삭제</a></td>
         {% endfor %}
+    </tr>
+    <tr>
+        <td width="100" colspan="5" align="left"><a href = "input/subnum">기준 점수 입력</a></td>
     </tr>
     </table>
 </body>

@@ -149,3 +149,7 @@ def input_std(request):
             session.add(result)
             session.commit()
     return redirect('view/standard')
+
+def upd_std(request, subject):
+    print(subject)
+    return redirect('/')

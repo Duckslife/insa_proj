@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="MySQL - insa@localhost" uuid="eed36e67-862f-40a0-b820-2fda40f05d3d">
-      <secret-storage>master_key</secret-storage>
-      <user-name>user_a</user-name>
-      <schema-pattern>insa.*</schema-pattern>
-      <default-schemas>insa.*</default-schemas>
-    </data-source>
     <data-source name="PostgreSQL - insa_tab@insa.ckzxdkr50slb.us-west-2.rds.amazonaws.com" uuid="090f9381-133a-47b2-9dfe-61187dc7a100">
       <secret-storage>master_key</secret-storage>
       <user-name>insa_master</user-name>

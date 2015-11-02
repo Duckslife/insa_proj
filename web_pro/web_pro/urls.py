@@ -20,5 +20,6 @@ urlpatterns = [
     url(r'view/standard', views.std_list, name='std'),
     url(r'view/grade/(?P<jobID>\d+)$', views.person_main, name='show'),
     url(r'view/dinfo/(?P<jobID>\d+)$', views.del_info, name='del'),
+    url(r'diff/std/(?P<subject>\d+)$', views.upd_std, name='mstd'),
     #url('/', ),
 ]

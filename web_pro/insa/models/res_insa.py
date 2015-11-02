@@ -13,6 +13,7 @@ class Res(Base):
     subject = Column(String(255))
     mark = Column(Integer)
     emp_id = Column(Integer, ForeignKey('employee.id'))
+    rate = Column(String(2))
 
     employee = relationship("Employee", backref = backref("res_insa"))
 
