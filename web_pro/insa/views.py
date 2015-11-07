@@ -1,4 +1,5 @@
 # -*- coding:utf-8 -*-
+# -*- coding: euc-kr -*-
 
 from django.shortcuts import render, render_to_response, redirect
 from django.http import request, HttpResponse
@@ -38,52 +39,49 @@ def counter(request):
 @csrf_exempt
 def count_person(request):
     count = request.POST['emp_count']
+    print(count)
     context_dict = {'count': range(0, int(count))}
     return render_to_response('info_input.html',context_dict)
 
 
 @csrf_exempt
-def add_person(request):
-    name = request.POST.getlist('name')
-    division = request.POST.getlist('division')
-    role = request.POST.getlist('role')
-    if name and division and role == '':
+class UserInfo:
+    def __init__(self, request):
+        pass
+
+    def del_info(self, jobID):
+        session.query(Employee).filter_by(id=jobID).delete()
+        session.commit()
         return redirect('/')
 
-    else:
-        for i in range(0, len(name)):
-            emp = Employee(
-                name = name[i],
-                division = division[i],
-                role = role[i]
-            )
-            session.add(emp)
-            session.commit()
-        return redirect('/')
+    def add_person(self):
+        name = request.POST.getlist('name')
+        division = request.POST.getlist('division')
+        role = request.POST.getlist('role')
+        if name and division and role == '':
+            return redirect('/')
 
-def person_main(request, jobID):
-    info = session.query(Res).filter_by(emp_id=jobID)
-    name = session.query(Employee.name, Employee.id).filter_by(id = jobID)
-    context_dict = {
-        'data': info,
-        'name': name
-    }
-    return render_to_response('grade.html', context_dict)
+        else:
+            for i in range(0, len(name)):
+                emp = Employee(
+                    name = name[i],
+                    division = division[i],
+                    role = role[i]
+                )
+                session.add(emp)
+                session.commit()
+            return redirect('/')
 
-
-def del_info(request, jobID):
-    session.query(Employee).filter_by(id=jobID).delete()
-    session.commit()
-    return redirect('/')
-'''
-class UserInfo(request):
-    def show_grade(self, jobID):
-        row = session.query(Employee).filter_by(id=jobID)
+    def person_main(self, jobID):
+        info = session.query(Res).filter_by(emp_id=jobID)
+        name = session.query(Employee.name, Employee.id).filter_by(id = jobID)
         context_dict = {
-            'data' : row
+            'data': info,
+            'name': name
         }
-        return render_to_response('grade.html',context_dict)
-'''
+        return render_to_response('grade.html', context_dict)
+
+
 @csrf_exempt
 def add_grade(request, jobID):
     user = session.query(Employee).filter_by(id=jobID)
@@ -124,10 +122,13 @@ def std_list(request):
             'data': session.query(Standard).all()
         }
         return render_to_response('standard_list.html', context_dict)
+    return render_to_response('std_subject_num.html')
 
-    else:
+def ag_std_num(request):
+    return render_to_response(
+        'std_subject_num.html'
+    )
 
-        return render_to_response('std_subject_num.html')
 @csrf_exempt
 def std_num(request):
     count = request.POST['sub_count']
@@ -151,5 +152,16 @@ def input_std(request):
     return redirect('view/standard')
 
 def upd_std(request, subject):
-    print(subject)
-    return redirect('/')
+    subdata = session.query(Standard).filter_by(subject=subject)
+    print(subdata)
+    context_dict = {
+        'data' : subdata
+    }
+    return render(request, 'std_diff.html', context_dict)
+
+@csrf_exempt
+def mod_std(request):
+    std = request.POST.getlist('mod_std')
+    print("this is number %s",std)
+    redir
+

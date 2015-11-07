@@ -3,3 +3,8 @@ postgresql:
     db_name: insa_tab
     username: insa_master
     passwd: dlstkwoddl
+postlocal:
+    host: localhost:5432
+    db_name: insa
+    username: Kim
+    passwd: kjy90kjt

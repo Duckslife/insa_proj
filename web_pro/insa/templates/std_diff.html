@@ -1,26 +1,23 @@
 <!DOCTYPE html>
-<html>
-<head lang="en">
+<html lang="en">
+<head>
     <meta charset="UTF-8">
-    <title>HRM</title>
+    <title></title>
 </head>
 <body>
+{% for info in data %}
+<h1>{{info.subject}} 기준 점수 변경</h1>
 
-
-
-    <h1>인사</h1>
-    <form method="post" action="/input/pinfo">
+    <form method="post" action="modif/{{info.subject}}">
+{% endfor %}
         <table border="1">
         <tr>
-        <td><input name="emp_count" id="emp_count" placeholder="입력 인원수를 입력하여 주세요."/></td>
-        </td>
+        <td><input name="mod_std" id = "mod_std" placeholder="점수를 입력하여 주세요"/></td>
         </tr>
         <tr><td colspan="3", align="right"><input type="submit" value="작성"/>
         <input type="reset" value="취소" /></td></tr>
         </table>
         {% csrf_token %}
     </form>
-
 </body>
-
 </html>
