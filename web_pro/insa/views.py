@@ -153,15 +153,20 @@ def input_std(request):
 
 def upd_std(request, subject):
     subdata = session.query(Standard).filter_by(subject=subject)
-    print(subdata)
     context_dict = {
         'data' : subdata
     }
     return render(request, 'std_diff.html', context_dict)
 
 @csrf_exempt
-def mod_std(request):
+def mod_std(request, subject):
     std = request.POST.getlist('mod_std')
-    print("this is number %s",std)
-    redir
+
+    print(std[0])
+    session.query(Standard).filter_by(subject=subject).update({"standard":int(std[0])})
+    session.commit()
+    return redirect("view/standard")
+
+def rmv_std(request):
+    pass
 

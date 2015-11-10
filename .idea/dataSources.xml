@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="2447560774">
-    <data-source source="LOCAL" name="PostgreSQL - insa_tab@insa.ckzxdkr50slb.us-west-2.rds.amazonaws.com" uuid="090f9381-133a-47b2-9dfe-61187dc7a100">
+  <component name="DataSourceManagerImpl" format="xml" hash="3617888493">
+    <data-source source="LOCAL" name="PostgreSQL - insa@localhost" uuid="a9e140ca-8846-462c-9bfc-e0b6fec264bc">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://insa.ckzxdkr50slb.us-west-2.rds.amazonaws.com:5432/insa_tab</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5432/insa</jdbc-url>
       <libraries />
     </data-source>
   </component>
